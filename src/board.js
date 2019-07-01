@@ -5,7 +5,7 @@ export class Board {
     this.islands = 5;
     this.victoryPoint = playerCount+1;
     this.gameSize = gameMode; //will be used as a modifier for pool and board size
-    this.costPool = 400
+    this.costPool = 400;
   }
 
   makeBoard() { // makes the board
@@ -33,20 +33,19 @@ export class Board {
     }
   }
 
-  makeIslandList() { //creates an array of various island options
+  makeIslandList(x,y) { //creates an array of various island options based on location s
     this.shapes = [];
-    let other = [[0, 0], [0,1], [0,2],[1,1]];
-    let line = [[0, 0], [0, 1]];
-    let l = [[0,0],[1,0],[0,1]];
-    // let z = [[0,1], [1,1], [1,0], [2,0]];
-    let diag = [[0,0], [1,1], [2,2]];
-    let s = [[0,0], [0,1], [1,1], [1,2]]
+    let other = [[x,x], [x,y+1], [x,y+2], [x+1,y+1]];
+    let line = [[x,y], [x,y+1]];
+    let l = [[x,y],[x+1,y],[x,y+1]];
+    let diag = [[x,y], [x+1,y+1], [x+2,y+2]];
+    let s = [[x,y], [x,y+1], [x+1,y+1], [x+1,y+2]];
     this.shapes.push(line);
     this.shapes.push(other);
     this.shapes.push(l);
     // shapes.push(z);
     this.shapes.push(diag);
-    this.shapes.push(s)
+    this.shapes.push(s);
   }
   createIslands(){ //chooses island type and specifies its location on board
     let currentIslands = [];
@@ -59,15 +58,27 @@ export class Board {
     return currentIslands;
   }
   placeIslands (currentIslands) {
-    let location1 = [5,5];
-    let location2 =[15,5];
-    let location3 = [5,15];
-    let location4 = [15,15];
-    let location5 = [Math.random()*(14-6),Math.random()*(14-6)];
+    let location1 = [parseInt(Math.random()*(7-3)+3),parseInt(Math.random()*(7-3)+3)];
+    let location2 = [parseInt(Math.random()*(18-14)+14),parseInt(Math.random()*(7-3)+3)];
+    let location3 = [parseInt(Math.random()*(7-3)+3),parseInt(Math.random()*(18-14)+14)];
+    let location4 = [parseInt(Math.random()*(18-14)+14),parseInt(Math.random()*(18-14)+14)];
+    let location5 = [parseInt(Math.random()*(13-6)+7),parseInt(Math.random()*(13-6)+7)];
+    console.log("location 5 : "+location5);
+    let layout = [];
+    layout.push(location1);
+    layout.push(location2);
+    layout.push(location3);
+    layout.push(location4);
+    layout.push(location5);
 
-    for (let i=1; i < 5; i++) {
-      let island = currentIslands[i];
-      let spot = document.querySelector('[data-x="'+location+i[0]'"][data-y="'+location+i[1]+'"]')
+    for (let i=0; i < layout.length; i++) {
+      let x = layout[i][0];
+      let y = layout[i][1];
+      // for (let j = 0; j < currentIslands[i].length; j++) {
+      //
+      // }
+      let block = document.querySelector('[data-x="'+x+'"][data-y="'+y+'"]');
+      block.classList.add('island');
     }
 
 
