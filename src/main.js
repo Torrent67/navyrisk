@@ -1,9 +1,11 @@
-import './styles.css';
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Constructor-Name } from './backend-code';
+import './styles.css';
+import { Board } from './board.js';
 
 $(function() {
-
+  let board = new Board(2, 1);
+  console.log(board);
+  board.makeBoard();
 });

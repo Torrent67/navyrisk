@@ -1,17 +1,26 @@
-# Bagheera's Pizzeria
+# Risky Navy
 
-#### _A web site for ordering pizza - June 21, 2019_
+#### _Risky Navy, a game loosely based on Battleship and Risk- July 1, 2019_
 
-#### _By **Na Hyung Choi**_
+#### _By **Trevor Teigen & Marqis Ramos**_
 
 ## Description
 
-On this web site, the user can choose toppings, crust, and a size for one or more pizzas, see the details of the order and the final cost, and "place an order."
+Combination of Risk and Battleship.
 
 ### Specs
 | Spec | Input | Output |
 | :-------------     | :------------- | :------------- |
-| **Creates a new pizza through a constructor** | var pizza1 = new Pizza ("large", ["cheese", "sausage"]) | pizza1 = { size : "large", toppings: ["cheese", "sausage"], cost: undefined} |
+| **Create game pieces** | board size: 20x20, ships objects | new Board, new Destroyer, new Battleship, etc |
+| **Form Navy from User input** | User: "2 destroyers, 2 cruisers, 1 carrier" | Navy Cost= 300, 2 Destroyers = -10 NC, 2 Cruisers = -20 NC, 1 Carrier = -50 NC|
+| **Calculate Movement** | User Click ship and new space | Check if valid move, then move to space |
+| **Calculate attacks** | User clicks own ship and then enemy ship | Check if valid attack, proceed to 'attack phase' |
+| **Attack Phase** | Users roll dice, highest numbers win | User 1 rolls: 5,4,1 vs User2 rolls: 6,2,2: User 1 loses 2 hitpoints on current ship |
+| **Cards** | Players draw a card once every 4 turns | Players draw on 4, 8, 12, 16, etc |
+| **Card Activation** | Player uses MS buff card | Ship of choice gets +1 to movement |
+| **Victory Points** | Player 'owns' a victory square'| Every 4 turns Player earns 10 Victory Points |
+
+
 
 ## Setup/Installation Requirements
 
@@ -25,13 +34,116 @@ On this web site, the user can choose toppings, crust, and a size for one or mor
 * JavaScript
 * jQuery
 * Bootstrap
+* Webpack
+* Jasmine/Karma
+
+
 
 ## Support and contact details
 
-_Please contact Na Hyung with questions and comments._
+_Please contact us with questions and comments._
 
 ### License
 
 *GNU GPLv3*
 
-Copyright (c) 2019 **_Na Hyung Choi_**
+Copyright (c) 2019 **_Trevor Teigen & Marqis Ramos_**
+
+risky navy
+boat values
+
+destroyer 5 1 square adjacent
+
+cruiser 10 2 square adjacent
+
+battle cruiser 20 4 square adjacent 6 is a crit hit allowing to roll an extra die (only on smaller ships)
+
+battle ship 40 6 square adjacent can shoot 4 shells as 4 dice 6 is a crit hit allowing to roll an extra die
+
+carrier 50 10 square adjacent 15 planes in total can roll 1 dice per plane per turn up to 10.
+
+
+Carrier {
+  cost: 50
+  attack: 5x10
+  defense: 4d
+  ms: 1
+  range: 10
+}
+battleship {
+    cost: 40
+    attack: 5d
+    defense: 4d
+    ms: 1
+    range: 6
+}
+battlecruiser {
+  cost: 20
+  attack: 3d
+  defense: 3d
+  ms: 2
+  range: 4
+}
+cruiser {
+  cost: 10
+  attack: 2d
+  defense: 2d
+  ms: 3
+  range: 2
+}
+destroyer {
+  cost: 5
+  attack: 1d
+  defense: 1d
+  ms: 3
+  range: 1
+}
+
+
+300 points
+
+ocean sectors 20x20
+
+
+
+attacker: 3 bc
+defender: 1 bs
+
+hits
+1
+2
+4
+6
+5
+
+
+
+destroyer, cruiser +1 AA
+carrier no defense (sniper class)
+battleship
+
+
+(roll to decide number of moves you get)
+movement
+1 sector per turn:
+carrier
+battleship
+2 sector:
+battlecruiser
+3:
+destroyer
+cruiser
+
+
+cards - 80
+MS buff - 15
+radar (range buff) - 15
+AA buff - 15
+Torpedo (+dice) - 7
+maneuver buff (+1 defense die) - 10
+repair (remove 1 counter) - 8
+reload (attack twice) - 6
+reinforcement ('build' new ship) - 4
+
+Victory Points:
+10 point every 4 turns, win at 50 points.
