@@ -19,5 +19,14 @@
 }
 
 .island {
-  background-color: tan;
+  background-image: url('https://media.istockphoto.com/videos/real-time-shot-of-sea-surf-aerial-top-down-view-at-cape-panwa-phuket-video-id1007270692?s=640x640');
+  background-size: cover;
+}
+.ship {
+  margin: 50px;
+}
+
+#carrier {
+  background-image: url("https://anticsonline.uk/Handlers/l.ashx?k=108389782");
+  background-size: cover;
 }
