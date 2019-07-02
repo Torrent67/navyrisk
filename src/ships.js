@@ -13,29 +13,39 @@ export class Ship {
     this.team = 1;
   }
 
-  placeShip (x,y,occupied) {
+  moveShip (x,y,occupied) {
     this.newPosition = [x,y,occupied];
     console.log(this.newPosition);
     console.log(this.position);
-    // console.log(this.newPosition);
 
     if (this.newPosition[2] !== 0) {
       if (this.newPosition[2] === this.team) {
         //own ship
       } else if (this.newPosition[2] === 5) {
         alert("Island captain! She'll run aground!")
+        return;
       } else {
         //attack ship
       }
-    }
-    if (!this.position) {
-      this.position = this.newPosition;
-      this.position[2]= this.team;
-    } else if (Math.abs(y-this.position[1]) <= this.move && Math.abs(x-this.position[0]) <= this.move ){
-      this.position = this.newPosition;
-      this.position[2]= this.team;
     } else {
-      alert("TOO FAR")
+      if (!this.position) {
+        this.position = this.newPosition;
+        this.position[2]= this.team;
+      } else if (Math.abs(y-this.position[1]) <= this.move && Math.abs(x-this.position[0]) <= this.move ){
+        this.position = this.newPosition;
+        this.position[2]= this.team;
+      } else {
+        alert("You Amatuer!")
+      }
     }
   }
+  placeShip() {
+  let block = document.querySelector('[data-x="'+this.position[0]+'"][data-y="'+this.position[1]+'"]');
+  block.dataset.state = 1;
+  block.style.background = 'url("https://anticsonline.uk/Handlers/l.ashx?k=108389782")';
+  block.style.backgroundSize = 'cover';
+  }
 }
+
+
+//if it has a number override, if it doesn't then water

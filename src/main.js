@@ -5,6 +5,24 @@ import './styles.css';
 import { Board } from './board.js';
 import { Ship } from './ships.js';
 
+// let preivousMove = [x,y] //remove the ship.name
+
+
+let previousMove;
+
+function clear() {
+
+  let block = document.querySelector('[data-x="'+previousMove[0]+'"][data-y="'+ previousMove[1] +'"]');
+  block.dataset.state = previousMove[2];
+  if (previousMove[2] === 5) {
+    //not empty
+  } else {
+    block.style.background = 'none';
+  }
+}
+
+
+
 function attachListeners() {
   let ship;
   $('.ship').on("click", function() {
@@ -25,12 +43,22 @@ function attachListeners() {
     }
   })
   $('.block').on("click", function() {
-    let x = Math.abs(parseInt(this.dataset.x));
-    let y = Math.abs(parseInt(this.dataset.y));
+    if (previousMove){
+      clear();
+    }
+    let x = parseInt(this.dataset.x);
+    let y = parseInt(this.dataset.y);
     let occupied = parseInt(this.dataset.state);
-    ship.placeShip(x,y, occupied);
+    previousMove = [x,y,occupied];
+    console.log("previousMove: " +previousMove);
+
+    ship.moveShip(x,y, occupied);
+    ship.placeShip(x,y);
+
+
 })
 }
+
 
 let shipyard=[];
 function shipInit() {
@@ -47,6 +75,8 @@ $(function() {
   shipInit();
   board.makeBoard();
   board.placeIslands();
-  let ship = shipyard[0];
   attachListeners();
 });
+
+
+//end turn, if this.position is not filled reset datastate -> 0
