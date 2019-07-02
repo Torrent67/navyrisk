@@ -25,7 +25,7 @@ export class Board {
         block.dataset.y = y;
         block.dataset.index = counter;
         block.dataset.state = 0;
-        block.innerHTML = "0 : " + counter;
+        block.innerHTML = x +" : " + y;
         row.appendChild(block);
         counter++;
       }
@@ -35,29 +35,25 @@ export class Board {
 
   makeIslandList(x,y) { //creates an array of various island options based on location s
     this.shapes = [];
-    let other = [[x,x], [x,y+1], [x,y+2], [x+1,y+1]];
+    let t = [[x,y], [x,y+1], [x,y+2], [x+1,y+1]];
     let line = [[x,y], [x,y+1]];
     let l = [[x,y],[x+1,y],[x,y+1]];
     let diag = [[x,y], [x+1,y+1], [x+2,y+2]];
     let s = [[x,y], [x,y+1], [x+1,y+1], [x+1,y+2]];
+    let box = [[x,y], [x+1,y], [x,y+1], [x+1,y+1]];
+    let diag2 = [[x,y], [x+1,y-1], [x+2,y-2]];
+    let u = [[x,y],[x-1,y-1],[x+1,y-1],[x-1,y],[x+1,y]];
     this.shapes.push(line);
-    this.shapes.push(other);
+    this.shapes.push(t);
     this.shapes.push(l);
-    // shapes.push(z);
+    this.shapes.push(box);
     this.shapes.push(diag);
     this.shapes.push(s);
+    this.shapes.push(diag2);
+    this.shapes.push(u);
   }
-  createIslands(){ //chooses island type and specifies its location on board
-    let currentIslands = [];
-    for (let i = 0; i < 5; i++) {
-      let randomIsland = this.shapes[Math.floor(Math.random()*this.shapes.length)];
-      currentIslands.push(randomIsland);
-    }
-    console.log("in function: " +currentIslands);
-    console.log("in function: "+currentIslands[1]);
-    return currentIslands;
-  }
-  placeIslands (currentIslands) {
+
+  placeIslands () {
     let location1 = [parseInt(Math.random()*(7-3)+3),parseInt(Math.random()*(7-3)+3)];
     let location2 = [parseInt(Math.random()*(18-14)+14),parseInt(Math.random()*(7-3)+3)];
     let location3 = [parseInt(Math.random()*(7-3)+3),parseInt(Math.random()*(18-14)+14)];
@@ -70,18 +66,25 @@ export class Board {
     layout.push(location3);
     layout.push(location4);
     layout.push(location5);
-
+    let currentIslands = [];
+    let x;
+    let y;
     for (let i=0; i < layout.length; i++) {
-      let x = layout[i][0];
-      let y = layout[i][1];
-      // for (let j = 0; j < currentIslands[i].length; j++) {
-      //
-      // }
-      let block = document.querySelector('[data-x="'+x+'"][data-y="'+y+'"]');
-      block.classList.add('island');
+      x = layout[i][0];
+      y = layout[i][1];
+      this.makeIslandList(x,y);
+      let randomIsland = this.shapes[Math.floor(Math.random()*this.shapes.length)];
+      randomIsland.forEach(function(coords){
+        let block = document.querySelector('[data-x="'+coords[0]+'"][data-y="'+coords[1]+'"]');
+        block.classList.add('island');
+        block.dataset.state = 5;
+      })
     }
+    this.makeIslandList(x,y);
+    console.log(this.shapes);
 
-
+    // let block = document.querySelector('[data-x="'+x+'"][data-y="'+y+'"]');
+    // block.classList.add('island');
 
 
   }

@@ -49,55 +49,8 @@ _Please contact us with questions and comments._
 
 Copyright (c) 2019 **_Trevor Teigen & Marqis Ramos_**
 
-risky navy
-boat values
-
-destroyer 5 1 square adjacent
-
-cruiser 10 2 square adjacent
-
-battle cruiser 20 4 square adjacent 6 is a crit hit allowing to roll an extra die (only on smaller ships)
-
-battle ship 40 6 square adjacent can shoot 4 shells as 4 dice 6 is a crit hit allowing to roll an extra die
-
-carrier 50 10 square adjacent 15 planes in total can roll 1 dice per plane per turn up to 10.
 
 
-Carrier {
-  cost: 50
-  attack: 5x10
-  defense: 4d
-  ms: 1
-  range: 10
-}
-battleship {
-    cost: 40
-    attack: 5d
-    defense: 4d
-    ms: 1
-    range: 6
-}
-battlecruiser {
-  cost: 20
-  attack: 3d
-  defense: 3d
-  ms: 2
-  range: 4
-}
-cruiser {
-  cost: 10
-  attack: 2d
-  defense: 2d
-  ms: 3
-  range: 2
-}
-destroyer {
-  cost: 5
-  attack: 1d
-  defense: 1d
-  ms: 3
-  range: 1
-}
 
 
 300 points
@@ -106,21 +59,6 @@ ocean sectors 20x20
 
 
 
-attacker: 3 bc
-defender: 1 bs
-
-hits
-1
-2
-4
-6
-5
-
-
-
-destroyer, cruiser +1 AA
-carrier no defense (sniper class)
-battleship
 
 
 (roll to decide number of moves you get)
